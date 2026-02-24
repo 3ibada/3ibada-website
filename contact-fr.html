@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | ibada - 3ibada</title>
+    <meta name="description" content="Contactez-nous pour toute question concernant l'application ibada">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="container nav">
+            <a href="index-fr.html" class="logo">
+                <img src="assets/images/logo-gold.svg" alt="3ibada Logo" style="height: 40px;">
+                <span>3ibada</span>
+            </a>
+            <div class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index-fr.html">Accueil</a></li>
+                    <li><a href="contact-fr.html" class="active">Contact</a></li>
+                    <li class="lang-switcher">
+                        <a href="contact-fr.html" class="lang-btn active">FR</a>
+                        <a href="contact-ar.html" class="lang-btn">AR</a>
+                        <a href="contact-en.html" class="lang-btn">EN</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main style="padding: 6rem 0 4rem; min-height: 60vh;">
+        <div class="container">
+            <div style="max-width: 700px; margin: 0 auto;">
+                <h1 style="text-align: center; color: var(--violet-deep); margin-bottom: 1rem;">Contactez-nous</h1>
+                <p style="text-align: center; color: var(--gray-dark); margin-bottom: 3rem;">
+                    Une question ? Une suggestion ? N'hésitez pas à nous contacter, nous serons ravis de vous répondre !
+                </p>
+                
+                <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(139, 92, 246, 0.1);">
+                    <form action="https://formsubmit.co/contact@3ibada.com" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <input type="hidden" name="_subject" value="Nouveau message depuis 3ibada.com">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="box">
+                        <input type="text" name="_honey" style="display:none">
+                        
+                        <div>
+                            <label for="name" style="display: block; margin-bottom: 0.5rem; color: var(--violet-deep); font-weight: 600;">Nom *</label>
+                            <input type="text" id="name" name="name" required style="width: 100%; padding: 1rem; border: 2px solid var(--violet-pale); border-radius: 10px; font-family: var(--font-body); font-size: 1rem;">
+                        </div>
+                        
+                        <div>
+                            <label for="email" style="display: block; margin-bottom: 0.5rem; color: var(--violet-deep); font-weight: 600;">Email *</label>
+                            <input type="email" id="email" name="email" required style="width: 100%; padding: 1rem; border: 2px solid var(--violet-pale); border-radius: 10px; font-family: var(--font-body); font-size: 1rem;">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" style="display: block; margin-bottom: 0.5rem; color: var(--violet-deep); font-weight: 600;">Sujet *</label>
+                            <input type="text" id="subject" name="Sujet" required style="width: 100%; padding: 1rem; border: 2px solid var(--violet-pale); border-radius: 10px; font-family: var(--font-body); font-size: 1rem;">
+                        </div>
+                        
+                        <div>
+                            <label for="message" style="display: block; margin-bottom: 0.5rem; color: var(--violet-deep); font-weight: 600;">Message *</label>
+                            <textarea id="message" name="message" rows="6" required style="width: 100%; padding: 1rem; border: 2px solid var(--violet-pale); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; resize: vertical;"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            Envoyer le message
+                            <span>→</span>
+                        </button>
+                    </form>
+                    
+                    <p style="text-align: center; color: var(--gray-medium); font-size: 0.9rem; margin-top: 1.5rem;">* Champs obligatoires</p>
+                </div>
+                
+                <div style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center; padding: 2rem; background: var(--cream-dark); border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📧</div>
+                        <h3 style="color: var(--violet-deep); margin-bottom: 0.5rem;">Email</h3>
+                        <p style="color: var(--gray-dark);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8cefe3e2f8edeff8ccbfe5eeede8eda2efe3e1">[email&#160;protected]</a></p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: var(--cream-dark); border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📍</div>
+                        <h3 style="color: var(--violet-deep); margin-bottom: 0.5rem;">Adresse</h3>
+                        <p style="color: var(--gray-dark);">13 Rue Ernest Fabregue<br>69009 Lyon, France</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>3ibada</h3>
+                    <p>Application mobile d'accompagnement spirituel</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens utiles</h3>
+                    <a href="index-fr.html">Accueil</a>
+                    <a href="privacy-fr.html">Politique de confidentialité</a>
+                    <a href="terms-fr.html">Conditions d'utilisation</a>
+                    <a href="contact-fr.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email : <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="21424e4f55404255611248434045400f424e4c">[email&#160;protected]</a></p>
+                    <p>13 Rue Ernest Fabregue<br>69009 Lyon, France</p>
+                </

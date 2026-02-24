@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ibada - Application mobile pour accompagner les musulmans dans leur pratique religieuse quotidienne">
+    <meta name="keywords" content="islam, musulman, prière, coran, application, spiritualité, ibada, 3ibada">
+    
+    <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+    <title>ibada - Le baromètre des adorations | 3ibada</title>
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="alternate" hreflang="fr" href="https://3ibada.com/index-fr.html">
+    <link rel="alternate" hreflang="ar" href="https://3ibada.com/index-ar.html">
+    <link rel="alternate" hreflang="en" href="https://3ibada.com/index-en.html">
+    
+    <script>
+    // Language detection and automatic redirection
+    (function () {
+        const supported = ['fr', 'ar', 'en'];
+
+        // Compute base path (handles deployment in a subfolder)
+        const path = window.location.pathname;
+        const base = path.endsWith('/') ? path : path.substring(0, path.lastIndexOf('/') + 1);
+
+        // If user has a saved language preference, use it
+        const savedLang = localStorage.getItem('preferred-language');
+        if (savedLang && supported.includes(savedLang)) {
+            window.location.replace(base + `index-${savedLang}.html`);
+            return;
+        }
+
+        // Detect browser language
+        const browserLang = (navigator.language || 'fr').split('-')[0];
+        const targetLang = supported.includes(browserLang) ? browserLang : 'fr';
+
+        // Save a valid preference (never save unsupported codes like "de")
+        localStorage.setItem('preferred-language', targetLang);
+
+        // Redirect
+        window.location.replace(base + `index-${targetLang}.html`);
+    })();
+</script>
+
+    
+    <style>
+        /* Loading screen while redirecting */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FDFBF7 0%, #F5F3EE 100%);
+            font-family: 'Manrope', sans-serif;
+        }
+        
+        .loader {
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .loader img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        .loader h1 {
+            color: #6B46C1;
+            font-size: 2rem;
+            margin: 0 0 1rem 0;
+            font-weight: 600;
+        }
+        
+        .loader p {
+            color: #9CA3AF;
+            font-size: 1rem;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            margin: 2rem auto;
+            border: 4px solid #DDD6FE;
+            border-top-color: #8B5CF6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Manual language selection (shown if JavaScript fails) */
+        .manual-selection {
+            display: none;
+            margin-top: 2rem;
+        }
+        
+        .manual-selection.show {
+            display: block;
+        }
+        
+        .lang-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .lang-links a {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: #8B5CF6;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-links a:hover {
+            background: #6B46C1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(107, 70, 193, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <img src="assets/images/logo.svg" alt="3ibada Logo">
+        <h1>3ibada</h1>
+        <p>Redirection en cours...</p>
+        <div class="spinner"></div>
+        
+        <noscript>
+            <div class="manual-selection show">
+                <p style="color: #6B46C1; font-weight: 600; margin-bottom: 1rem;">
+                    Veuillez sélectionner votre langue / Please select your language / يرجى اختيار لغتك
+                </p>
+                <div class="lang-links">
+                    <a href="index-fr.html">Français</a>
+                    <a href="index-ar.html">العربية</a>
+                    <a href="index-en.html">English</a>
+                </div>
+            </div>
+        </noscript>
+    </div>
+    
+    <script>
+        // Show manual selection after 3 seconds if redirect fails
+        setTimeout(function() {
+            const manualSelection = document.querySelector('.manual-selection');
+            if (manualSelection) {
+                manualSelection.classList.add('show');
+            }
+        }, 3000);
+    </script>
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# robots.txt for 3ibada.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://3ibada.com/sitemap.xml
+
+# Disallow nothing - all pages are public and indexable
