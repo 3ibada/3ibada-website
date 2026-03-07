@@ -4,21 +4,12 @@
 
 // Language Configuration
 const languages = {
-  fr: {
-    code: 'fr',
-    dir: 'ltr',
-    name: 'Français'
-  },
-  ar: {
-    code: 'ar',
-    dir: 'rtl',
-    name: 'العربية'
-  },
-  en: {
-    code: 'en',
-    dir: 'ltr',
-    name: 'English'
-  }
+  fr: { code: 'fr', dir: 'ltr', name: 'Français' },
+  ar: { code: 'ar', dir: 'rtl', name: 'العربية' },
+  en: { code: 'en', dir: 'ltr', name: 'English' },
+  tr: { code: 'tr', dir: 'ltr', name: 'Türkçe' },
+  id: { code: 'id', dir: 'ltr', name: 'Indonesia' },
+  ur: { code: 'ur', dir: 'rtl', name: 'اردو' }
 };
 
 // Initialize on DOM load
@@ -31,17 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Language Detection & Switching
 function initLanguage() {
-  // Get current language from URL or localStorage
   let currentLang = getCurrentLanguage();
-  
-  // Set document direction
   document.documentElement.dir = languages[currentLang].dir;
   document.body.dir = languages[currentLang].dir;
-  
-  // Update active language button
   updateLanguageButtons(currentLang);
   
-  // Add language switcher event listeners
   const langButtons = document.querySelectorAll('.lang-btn');
   langButtons.forEach(btn => {
     btn.addEventListener('click', function() {
@@ -51,30 +36,16 @@ function initLanguage() {
 }
 
 function getCurrentLanguage() {
-  // Check URL first
   const path = window.location.pathname;
+  const match = path.match(/-(fr|ar|en|tr|id|ur)\.html$/);
+  if (match) return match[1];
   
-  if (path.includes('privacy-ar') || path.includes('terms-ar')) return 'ar';
-  if (path.includes('privacy-en') || path.includes('terms-en')) return 'en';
-  if (path.includes('privacy-fr') || path.includes('terms-fr')) return 'fr';
-  
-  if (path.includes('-ar.html')) return 'ar';
-  if (path.includes('-en.html')) return 'en';
-  if (path.includes('-fr.html')) return 'fr';
-  
-  // Check localStorage
   const savedLang = localStorage.getItem('preferred-language');
-  if (savedLang && languages[savedLang]) {
-    return savedLang;
-  }
+  if (savedLang && languages[savedLang]) return savedLang;
   
-  // Detect browser language
   const browserLang = navigator.language.split('-')[0];
-  if (languages[browserLang]) {
-    return browserLang;
-  }
+  if (languages[browserLang]) return browserLang;
   
-  // Default to French
   return 'fr';
 }
 
@@ -89,14 +60,11 @@ function updateLanguageButtons(activeLang) {
 }
 
 function switchLanguage(targetLang) {
-  // Save preference
   localStorage.setItem('preferred-language', targetLang);
   
-  // Get current page type
   const currentPath = window.location.pathname;
   let newPath = '';
   
-  // Determine new path based on current page
   if (currentPath.includes('privacy')) {
     newPath = `privacy-${targetLang}.html`;
   } else if (currentPath.includes('terms')) {
@@ -104,18 +72,15 @@ function switchLanguage(targetLang) {
   } else if (currentPath.includes('contact')) {
     newPath = `contact-${targetLang}.html`;
   } else {
-    // Default to index page (handles both / and /index-XX.html)
     newPath = `index-${targetLang}.html`;
   }
   
-  // Navigate to new page - use replace to avoid cache issues
   window.location.replace('/' + newPath);
 }
 
 // Scroll Effects
 function initScrollEffects() {
   const header = document.querySelector('.header');
-  
   window.addEventListener('scroll', function() {
     if (window.scrollY > 50) {
       header.classList.add('scrolled');
@@ -129,7 +94,6 @@ function initScrollEffects() {
 function initMobileMenu() {
   const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
-  
   if (mobileMenuBtn && navLinks) {
     mobileMenuBtn.addEventListener('click', function() {
       navLinks.classList.toggle('active');
@@ -141,22 +105,17 @@ function initMobileMenu() {
 // Scroll Reveal Animation
 function initScrollReveal() {
   const reveals = document.querySelectorAll('.reveal');
-  
   const revealOnScroll = () => {
     const windowHeight = window.innerHeight;
-    
     reveals.forEach(element => {
       const elementTop = element.getBoundingClientRect().top;
-      const revealPoint = 100;
-      
-      if (elementTop < windowHeight - revealPoint) {
+      if (elementTop < windowHeight - 100) {
         element.classList.add('active');
       }
     });
   };
-  
   window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // Initial check
+  revealOnScroll();
 }
 
 // Smooth Scroll for Anchor Links
@@ -165,126 +124,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     e.preventDefault();
     const target = document.querySelector(this.getAttribute('href'));
     if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 });
 
-// Form Validation (for contact page)
-function validateContactForm(form) {
-  const email = form.querySelector('input[type="email"]');
-  const message = form.querySelector('textarea');
-  
-  let isValid = true;
-  
-  // Email validation
-  if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-    showError(email, 'Please enter a valid email address');
-    isValid = false;
-  }
-  
-  // Message validation
-  if (message.value.trim().length < 10) {
-    showError(message, 'Message must be at least 10 characters');
-    isValid = false;
-  }
-  
-  return isValid;
-}
-
-function showError(input, message) {
-  const errorDiv = document.createElement('div');
-  errorDiv.className = 'error-message';
-  errorDiv.textContent = message;
-  errorDiv.style.color = 'red';
-  errorDiv.style.fontSize = '0.875rem';
-  errorDiv.style.marginTop = '0.25rem';
-  
-  // Remove existing error if any
-  const existingError = input.parentElement.querySelector('.error-message');
-  if (existingError) {
-    existingError.remove();
-  }
-  
-  input.parentElement.appendChild(errorDiv);
-  input.style.borderColor = 'red';
-  
-  // Remove error on input
-  input.addEventListener('input', function() {
-    errorDiv.remove();
-    input.style.borderColor = '';
-  }, { once: true });
-}
-
-// Copy to Clipboard (for sharing links)
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    showNotification('Link copied to clipboard!');
-  }).catch(err => {
-    console.error('Failed to copy:', err);
-  });
-}
-
-function showNotification(message) {
-  const notification = document.createElement('div');
-  notification.textContent = message;
-  notification.style.cssText = `
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--violet-deep);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    box-shadow: 0 10px 30px rgba(107, 70, 193, 0.3);
-    z-index: 10000;
-    animation: slideUp 0.3s ease;
-  `;
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.style.animation = 'slideDown 0.3s ease';
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
-// Lazy Loading Images
-function initLazyLoading() {
-  const images = document.querySelectorAll('img[data-src]');
-  
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-        observer.unobserve(img);
-      }
-    });
-  });
-  
-  images.forEach(img => imageObserver.observe(img));
-}
-
-// Page Performance
-if ('loading' in HTMLImageElement.prototype) {
-  const images = document.querySelectorAll('img[loading="lazy"]');
-  images.forEach(img => {
-    img.src = img.dataset.src;
-  });
-} else {
-  initLazyLoading();
-}
-
-// Analytics (placeholder - replace with actual analytics)
+// Track initial page view
 function trackPageView(page) {
   console.log('Page view:', page);
-  // Add Google Analytics or other tracking here
 }
-
-// Track initial page view
 trackPageView(window.location.pathname);
