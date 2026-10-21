@@ -745,3 +745,13 @@ body[dir="rtl"] .legal-meta {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* V8: store badges first in hero */
+.hero-content .store-badges { margin-top: var(--space-md); }
+.hero-content .store-badges + .cta-buttons { margin-top: var(--space-sm); }
+
+/* V8: fix horizontal overflow on mobile (decorative hero circle) */
+html { overflow-x: hidden; }
+
+/* V8: hero title stayed invisible (fadeInUp overrode .fade-in and left opacity at 0) */
+.hero h1 { animation: fadeInUp 0.8s ease both; }
